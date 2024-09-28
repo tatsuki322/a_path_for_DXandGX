@@ -23,7 +23,6 @@ class ArrowDiagram extends Frame {
 		FontRenderContext frc = g.getFontRenderContext();
 		try {
 			Scanner tasktext = new Scanner(new File("task.txt")).useDelimiter(",\\s|\\n");
-			String datum;
 			List<Task> diagram = new ArrayList<Task>();
 			int starting_point, end_point;
 			String alphabet, taskname, time;
@@ -40,7 +39,7 @@ class ArrowDiagram extends Frame {
 			Scanner statetext = new Scanner(new File("state.txt"));
 			int[] count = {0, 0};
 			while (statetext.hasNextLine()) {
-				String s = statetext.nextLine();
+				statetext.nextLine();
 				count[0]++;
 			}
 			statetext.close();
@@ -146,11 +145,10 @@ class ArrowDiagram extends Frame {
 		}
 	}
 	int parsing(List<Task> diagram, int k) {
-		Scanner hour_days = new Scanner(diagram.get(k).get_time()).useDelimiter("×");
-		double hour;
+		Scanner hour_days = new Scanner(diagram.get(k).get_time()).useDelimiter("×|x|X");
 		String tmpdays;
 		int days;
-		hour = hour_days.nextDouble();
+		hour_days.nextDouble();
 		tmpdays = hour_days.next();
 		hour_days.close();
 		days = Integer.parseInt(tmpdays.substring(0, k==diagram.size()-1 ? tmpdays.length() : tmpdays.length()-1));
